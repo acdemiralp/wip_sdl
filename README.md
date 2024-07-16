@@ -1,5 +1,5 @@
 ## SDL
-Header-only C++23 wrapper for SDL 2.28.
+Header-only C++23 wrapper for SDL 2.30.
 
 ### Building the tests
 - Run `bootstrap.[bat|sh]`. This will install doctest + sdl, and create the project under the `./build` directory.
@@ -81,7 +81,7 @@ Alternatively, you can copy the contents of the include folder to your project.
 - [ ] ~~SDL_opengles2.h~~             (Reason: Use a dedicated OpenGL ES wrapper instead.)
 - [ ] ~~SDL_opengles2_gl2platform.h~~ (Reason: Use a dedicated OpenGL ES wrapper instead.)
 - [ ] ~~SDL_opengles2_khrplatform.h~~ (Reason: Use a dedicated OpenGL ES wrapper instead.)
-- [ ] SDL_pixels.h
+- [x] SDL_pixels.h
 - [x] SDL_platform.h
 - [x] SDL_power.h
 - [x] SDL_quit.h
