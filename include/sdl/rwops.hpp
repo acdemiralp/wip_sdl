@@ -523,21 +523,21 @@ public:
   }
 
   [[nodiscard]]
-  SDL_RWops*                                            native          () const
+  native_rw_ops*                                        native          () const
   {
     return native_;
   }
 
 protected:
-  SDL_RWops* native_      {};
-  bool       should_free_ {false};
+  native_rw_ops* native_      {};
+  bool           should_free_ {false};
 };
 
 // Bad practice: You should use `std::fstream` instead.
 [[nodiscard]]
 inline std::expected<rw_ops                   , std::string> make_rw_ops      ()
 {
-  auto result = rw_ops();
+  rw_ops result;
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -546,7 +546,7 @@ inline std::expected<rw_ops                   , std::string> make_rw_ops      ()
 [[nodiscard]]
 inline std::expected<rw_ops                   , std::string> make_rw_ops      (const std::string& filepath, const std::string& mode)
 {
-  auto result = rw_ops(filepath, mode);
+  rw_ops result(filepath, mode);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -555,7 +555,7 @@ inline std::expected<rw_ops                   , std::string> make_rw_ops      (c
 [[nodiscard]]
 inline std::expected<rw_ops                   , std::string> make_rw_ops      (std::FILE* file, const bool auto_close = false)
 {
-  auto result = rw_ops(file, auto_close);
+  rw_ops result(file, auto_close);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -564,7 +564,7 @@ inline std::expected<rw_ops                   , std::string> make_rw_ops      (s
 [[nodiscard]]
 inline std::expected<rw_ops                   , std::string> make_rw_ops      (const std::span<      std::byte>& memory)
 {
-  auto result = rw_ops(memory);
+  rw_ops result(memory);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -573,7 +573,7 @@ inline std::expected<rw_ops                   , std::string> make_rw_ops      (c
 [[nodiscard]]
 inline std::expected<rw_ops                   , std::string> make_rw_ops      (const std::span<const std::byte>& memory)
 {
-  auto result = rw_ops(memory);
+  rw_ops result(memory);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -582,7 +582,7 @@ inline std::expected<rw_ops                   , std::string> make_rw_ops      (c
 template <typename type> [[nodiscard]]
 std::expected       <rw_ops                   , std::string> make_rw_ops      (const std::span<      type>&      memory)
 {
-  auto result = rw_ops(memory);
+  rw_ops result(memory);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
@@ -591,7 +591,7 @@ std::expected       <rw_ops                   , std::string> make_rw_ops      (c
 template <typename type> [[nodiscard]]
 std::expected       <rw_ops                   , std::string> make_rw_ops      (const std::span<const type>&      memory)
 {
-  auto result = rw_ops(memory);
+  rw_ops result(memory);
   if (!result.native())
     return std::unexpected(get_error());
   return result;
