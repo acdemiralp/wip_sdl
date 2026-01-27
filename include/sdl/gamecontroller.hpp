@@ -408,9 +408,12 @@ inline bool game_controller_is_sensor_enabled(native_game_controller* game_contr
 }
 
 [[nodiscard]]
-inline float game_controller_get_sensor_data_rate(native_game_controller* game_controller, const SDL_SensorType type)
+inline std::expected<float, std::string> game_controller_get_sensor_data_rate(native_game_controller* game_controller, const SDL_SensorType type)
 {
-  return SDL_GameControllerGetSensorDataRate(game_controller, type);
+  const auto result = SDL_GameControllerGetSensorDataRate(game_controller, type);
+  if (result < 0.0f)
+    return std::unexpected(get_error());
+  return result;
 }
 
 [[nodiscard]]

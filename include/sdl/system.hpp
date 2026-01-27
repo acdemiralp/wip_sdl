@@ -21,17 +21,19 @@ inline std::expected<void, std::string> direct3d9_get_adapter_index(const std::u
   return {};
 }
 
-using id_direct3d_device9 = IDirect3DDevice9;
+using id_direct3d_device9  = IDirect3DDevice9;
+using id_direct3d_device11 = ID3D11Device;
+using id_direct3d_device12 = ID3D12Device;
 
 inline id_direct3d_device9* render_get_d3d9_device(SDL_Renderer* renderer)
 {
   return SDL_RenderGetD3D9Device(renderer);
 }
-inline id_direct3d_device9* render_get_d3d11_device(SDL_Renderer* renderer)
+inline id_direct3d_device11* render_get_d3d11_device(SDL_Renderer* renderer)
 {
   return SDL_RenderGetD3D11Device(renderer);
 }
-inline id_direct3d_device9* render_get_d3d12_device(SDL_Renderer* renderer)
+inline id_direct3d_device12* render_get_d3d12_device(SDL_Renderer* renderer)
 {
   return SDL_RenderGetD3D12Device(renderer);
 }
@@ -94,7 +96,7 @@ inline bool is_dex_mode()
 {
   return SDL_IsDeXMode() == SDL_TRUE;
 }
-inline void android_backup_state()
+inline void android_back_button()
 {
   SDL_AndroidBackButton();
 }

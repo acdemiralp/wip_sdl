@@ -262,12 +262,12 @@ inline std::int16_t joystick_get_axis(native_joystick* joystick, const std::int3
 }
 
 [[nodiscard]]
-inline std::expected<std::array<std::int16_t, 2>, std::string> joystick_get_axis_initial_state(native_joystick* joystick, const std::int32_t axis)
+inline std::expected<std::int16_t, std::string> joystick_get_axis_initial_state(native_joystick* joystick, const std::int32_t axis)
 {
   std::int16_t state;
   if (!SDL_JoystickGetAxisInitialState(joystick, axis, &state))
     return std::unexpected(get_error());
-  return std::array<std::int16_t, 2>{0, state};
+  return state;
 }
 
 [[nodiscard]]

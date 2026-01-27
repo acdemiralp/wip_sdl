@@ -172,11 +172,12 @@ inline std::expected<native_audio_device_id, std::string> open_audio_device(
   audio_spec*        obtained,
   const std::int32_t allowed_changes)
 {
+  SDL_AudioSpec native_desired = desired.native();
   SDL_AudioSpec native_obtained;
   const auto result = SDL_OpenAudioDevice(
     device ? device->c_str() : nullptr,
     is_capture ? 1 : 0,
-    &desired.native(),
+    &native_desired,
     obtained ? &native_obtained : nullptr,
     allowed_changes);
   
@@ -348,12 +349,10 @@ inline std::expected<void, std::string> queue_audio(const native_audio_device_id
   return {};
 }
 
-inline std::expected<void, std::string> dequeue_audio(const native_audio_device_id device, void* data, const std::uint32_t len)
+[[nodiscard]]
+inline std::uint32_t dequeue_audio(const native_audio_device_id device, void* data, const std::uint32_t len)
 {
-  const auto result = SDL_DequeueAudio(device, data, len);
-  if (result != len)
-    return std::unexpected(get_error());
-  return {};
+  return SDL_DequeueAudio(device, data, len);
 }
 
 [[nodiscard]]

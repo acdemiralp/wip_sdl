@@ -434,10 +434,10 @@ inline std::array<std::int32_t, 2> get_window_size(native_window* window)
 [[nodiscard]]
 inline std::expected<rectangle<std::int32_t>, std::string> get_window_borders_size(native_window* window)
 {
-  rectangle<std::int32_t> borders;
-  if (SDL_GetWindowBordersSize(window, &borders.y, &borders.x, &borders.h, &borders.w) < 0)
+  std::int32_t top, left, bottom, right;
+  if (SDL_GetWindowBordersSize(window, &top, &left, &bottom, &right) < 0)
     return std::unexpected(get_error());
-  return borders;
+  return rectangle<std::int32_t>{left, top, right - left, bottom - top};
 }
 
 [[nodiscard]]
@@ -698,7 +698,14 @@ inline std::int32_t get_window_display_index(native_window* window)
 
 inline std::expected<void, std::string> set_window_display_mode(native_window* window, const display_mode* mode)
 {
-  if (SDL_SetWindowDisplayMode(window, mode ? &mode->native() : nullptr) < 0)
+  SDL_DisplayMode native_mode;
+  const SDL_DisplayMode* mode_ptr = nullptr;
+  if (mode)
+  {
+    native_mode = mode->native();
+    mode_ptr = &native_mode;
+  }
+  if (SDL_SetWindowDisplayMode(window, mode_ptr) < 0)
     return std::unexpected(get_error());
   return {};
 }

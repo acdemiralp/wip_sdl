@@ -238,12 +238,13 @@ inline std::expected<void, std::string> haptic_stop_all(native_haptic* haptic)
   return {};
 }
 
-inline std::expected<void, std::string> haptic_rumble_supported(native_haptic* haptic)
+[[nodiscard]]
+inline std::expected<bool, std::string> haptic_rumble_supported(native_haptic* haptic)
 {
   const auto result = SDL_HapticRumbleSupported(haptic);
   if (result < 0)
     return std::unexpected(get_error());
-  return {};
+  return result == SDL_TRUE;
 }
 
 inline std::expected<void, std::string> haptic_rumble_init(native_haptic* haptic)
