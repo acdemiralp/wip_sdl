@@ -30,7 +30,7 @@ Alternatively, you can copy the contents of the include folder to your project.
 - [x] SDL.h
 - [x] SDL_assert.h
 - [x] SDL_atomic.h
-- [ ] SDL_audio.h
+- [x] SDL_audio.h
 - [x] SDL_bits.h
 - [x] SDL_blendmode.h
 - [x] SDL_clipboard.h
@@ -54,15 +54,15 @@ Alternatively, you can copy the contents of the include folder to your project.
 - [ ] ~~SDL_egl.h~~                   (Reason: Use a dedicated EGL wrapper such as [matus-chochlik/eagine-eglplus](https://github.com/matus-chochlik/eagine-eglplus) instead.)
 - [x] SDL_endian.h
 - [x] SDL_error.h
-- [ ] SDL_events.h
+- [x] SDL_events.h
 - [x] SDL_filesystem.h
-- [ ] SDL_gamecontroller.h
+- [x] SDL_gamecontroller.h
 - [x] SDL_gesture.h
 - [x] SDL_guid.h
-- [ ] SDL_haptic.h
+- [x] SDL_haptic.h
 - [x] SDL_hidapi.h
 - [x] SDL_hints.h
-- [ ] SDL_joystick.h
+- [x] SDL_joystick.h
 - [x] SDL_keyboard.h
 - [x] SDL_keycode.h
 - [x] SDL_loadso.h
@@ -86,16 +86,16 @@ Alternatively, you can copy the contents of the include folder to your project.
 - [x] SDL_power.h
 - [x] SDL_quit.h
 - [x] SDL_rect.h
-- [ ] SDL_render.h
+- [x] SDL_render.h
 - [x] SDL_revision.h
 - [ ] ~~SDL_revision.h.cmake~~        (Reason: Nothing to wrap.)
 - [x] SDL_rwops.h
 - [x] SDL_scancode.h
 - [x] SDL_sensor.h
 - [x] SDL_shape.h
-- [ ] SDL_stdinc.h
-- [ ] SDL_surface.h
-- [ ] SDL_system.h
+- [x] SDL_stdinc.h
+- [x] SDL_surface.h
+- [x] SDL_system.h
 - [x] SDL_syswm.h
 - [ ] ~~SDL_test.h~~                  (Reason: Use a dedicated testing library such as [onqtam/doctest](https://github.com/doctest/doctest) instead.)
 - [ ] ~~SDL_test_assert.h~~           (Reason: Use a dedicated testing library instead.)
@@ -115,7 +115,7 @@ Alternatively, you can copy the contents of the include folder to your project.
 - [x] SDL_touch.h
 - [ ] ~~SDL_types.h~~                 (Reason: Nothing to wrap.)
 - [x] SDL_version.h
-- [ ] SDL_video.h
+- [x] SDL_video.h
 - [x] SDL_vulkan.h
 - [ ] ~~begin_code.h~~                (Reason: Nothing to wrap.)
 - [ ] ~~close_code.h~~                (Reason: Nothing to wrap.)
