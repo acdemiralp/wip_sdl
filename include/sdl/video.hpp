@@ -880,6 +880,230 @@ public:
     return native_;
   }
 
+  // Additional convenience methods for window management
+  [[nodiscard]]
+  std::uint32_t get_id() const
+  {
+    return get_window_id(native_);
+  }
+
+  [[nodiscard]]
+  window_flags get_flags() const
+  {
+    return get_window_flags(native_);
+  }
+
+  void set_title(const std::string& title) const
+  {
+    set_window_title(native_, title);
+  }
+
+  [[nodiscard]]
+  std::string get_title() const
+  {
+    return get_window_title(native_);
+  }
+
+  void set_icon(SDL_Surface* icon) const
+  {
+    set_window_icon(native_, icon);
+  }
+
+  void* set_data(const std::string& name, void* userdata) const
+  {
+    return set_window_data(native_, name, userdata);
+  }
+
+  [[nodiscard]]
+  void* get_data(const std::string& name) const
+  {
+    return get_window_data(native_, name);
+  }
+
+  void set_position(const std::array<std::int32_t, 2>& position) const
+  {
+    set_window_position(native_, position);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_position() const
+  {
+    return get_window_position(native_);
+  }
+
+  void set_size(const std::array<std::int32_t, 2>& size) const
+  {
+    set_window_size(native_, size);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_size() const
+  {
+    return get_window_size(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<rectangle<std::int32_t>, std::string> get_borders_size() const
+  {
+    return get_window_borders_size(native_);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_size_in_pixels() const
+  {
+    return get_window_size_in_pixels(native_);
+  }
+
+  void set_minimum_size(const std::array<std::int32_t, 2>& size) const
+  {
+    set_window_minimum_size(native_, size);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_minimum_size() const
+  {
+    return get_window_minimum_size(native_);
+  }
+
+  void set_maximum_size(const std::array<std::int32_t, 2>& size) const
+  {
+    set_window_maximum_size(native_, size);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_maximum_size() const
+  {
+    return get_window_maximum_size(native_);
+  }
+
+  void set_bordered(const bool bordered) const
+  {
+    set_window_bordered(native_, bordered);
+  }
+
+  void set_resizable(const bool resizable) const
+  {
+    set_window_resizable(native_, resizable);
+  }
+
+  void set_always_on_top(const bool on_top) const
+  {
+    set_window_always_on_top(native_, on_top);
+  }
+
+  void show() const
+  {
+    show_window(native_);
+  }
+
+  void hide() const
+  {
+    hide_window(native_);
+  }
+
+  void raise() const
+  {
+    raise_window(native_);
+  }
+
+  void maximize() const
+  {
+    maximize_window(native_);
+  }
+
+  void minimize() const
+  {
+    minimize_window(native_);
+  }
+
+  void restore() const
+  {
+    restore_window(native_);
+  }
+
+  std::expected<void, std::string> set_fullscreen(const std::uint32_t flags) const
+  {
+    return set_window_fullscreen(native_, flags);
+  }
+
+  [[nodiscard]]
+  bool has_surface() const
+  {
+    return has_window_surface(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<SDL_Surface*, std::string> get_surface() const
+  {
+    return get_window_surface(native_);
+  }
+
+  std::expected<void, std::string> update_surface() const
+  {
+    return update_window_surface(native_);
+  }
+
+  std::expected<void, std::string> destroy_surface() const
+  {
+    return destroy_window_surface(native_);
+  }
+
+  void set_grab(const bool grabbed) const
+  {
+    set_window_grab(native_, grabbed);
+  }
+
+  [[nodiscard]]
+  bool get_grab() const
+  {
+    return get_window_grab(native_);
+  }
+
+  std::expected<void, std::string> set_brightness(const float brightness) const
+  {
+    return set_window_brightness(native_, brightness);
+  }
+
+  [[nodiscard]]
+  float get_brightness() const
+  {
+    return get_window_brightness(native_);
+  }
+
+  std::expected<void, std::string> set_opacity(const float opacity) const
+  {
+    return set_window_opacity(native_, opacity);
+  }
+
+  [[nodiscard]]
+  std::expected<float, std::string> get_opacity() const
+  {
+    return get_window_opacity(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t get_display_index() const
+  {
+    return get_window_display_index(native_);
+  }
+
+  std::expected<void, std::string> set_display_mode(const display_mode* mode) const
+  {
+    return set_window_display_mode(native_, mode);
+  }
+
+  [[nodiscard]]
+  std::expected<display_mode, std::string> get_display_mode() const
+  {
+    return get_window_display_mode(native_);
+  }
+
+  [[nodiscard]]
+  std::uint32_t get_pixel_format() const
+  {
+    return get_window_pixel_format(native_);
+  }
+
 private:
   window(SDL_Window* native, const bool managed)
   : native_(native), managed_(managed)

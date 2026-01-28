@@ -321,6 +321,115 @@ public:
     return managed_;
   }
 
+  // Convenience methods
+  [[nodiscard]]
+  std::int32_t index() const
+  {
+    return haptic_index(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_effects() const
+  {
+    return haptic_num_effects(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_effects_playing() const
+  {
+    return haptic_num_effects_playing(native_);
+  }
+
+  [[nodiscard]]
+  std::uint32_t query() const
+  {
+    return haptic_query(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_axes() const
+  {
+    return haptic_num_axes(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<bool, std::string> effect_supported(const haptic_effect* effect) const
+  {
+    return haptic_effect_supported(native_, effect);
+  }
+
+  [[nodiscard]]
+  std::expected<std::int32_t, std::string> new_effect(const haptic_effect* effect) const
+  {
+    return haptic_new_effect(native_, effect);
+  }
+
+  std::expected<void, std::string> update_effect(const std::int32_t effect, const haptic_effect* data) const
+  {
+    return haptic_update_effect(native_, effect, data);
+  }
+
+  std::expected<void, std::string> run_effect(const std::int32_t effect, const std::uint32_t iterations) const
+  {
+    return haptic_run_effect(native_, effect, iterations);
+  }
+
+  std::expected<void, std::string> stop_effect(const std::int32_t effect) const
+  {
+    return haptic_stop_effect(native_, effect);
+  }
+
+  void destroy_effect(const std::int32_t effect) const
+  {
+    haptic_destroy_effect(native_, effect);
+  }
+
+  [[nodiscard]]
+  std::expected<bool, std::string> get_effect_status(const std::int32_t effect) const
+  {
+    return haptic_get_effect_status(native_, effect);
+  }
+
+  std::expected<void, std::string> set_gain(const std::int32_t gain) const
+  {
+    return haptic_set_gain(native_, gain);
+  }
+
+  std::expected<void, std::string> set_autocenter(const std::int32_t autocenter) const
+  {
+    return haptic_set_autocenter(native_, autocenter);
+  }
+
+  std::expected<void, std::string> pause() const
+  {
+    return haptic_pause(native_);
+  }
+
+  std::expected<void, std::string> unpause() const
+  {
+    return haptic_unpause(native_);
+  }
+
+  std::expected<void, std::string> stop_all() const
+  {
+    return haptic_stop_all(native_);
+  }
+
+  std::expected<void, std::string> rumble_init() const
+  {
+    return haptic_rumble_init(native_);
+  }
+
+  std::expected<void, std::string> rumble_play(const float strength, const std::uint32_t length) const
+  {
+    return haptic_rumble_play(native_, strength, length);
+  }
+
+  std::expected<void, std::string> rumble_stop() const
+  {
+    return haptic_rumble_stop(native_);
+  }
+
 private:
   native_haptic* native_  {};
   bool           managed_ {true};

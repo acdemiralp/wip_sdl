@@ -774,6 +774,118 @@ public:
     return managed_;
   }
 
+  // Convenience methods
+  [[nodiscard]]
+  std::expected<std::tuple<std::uint32_t, texture_access, std::array<std::int32_t, 2>>, std::string> query() const
+  {
+    return query_texture(native_);
+  }
+
+  std::expected<void, std::string> set_color_mod(const std::uint8_t r, const std::uint8_t g, const std::uint8_t b) const
+  {
+    return set_texture_color_mod(native_, r, g, b);
+  }
+
+  [[nodiscard]]
+  std::expected<std::array<std::uint8_t, 3>, std::string> get_color_mod() const
+  {
+    return get_texture_color_mod(native_);
+  }
+
+  std::expected<void, std::string> set_alpha_mod(const std::uint8_t alpha) const
+  {
+    return set_texture_alpha_mod(native_, alpha);
+  }
+
+  [[nodiscard]]
+  std::expected<std::uint8_t, std::string> get_alpha_mod() const
+  {
+    return get_texture_alpha_mod(native_);
+  }
+
+  std::expected<void, std::string> set_blend_mode(const blend_mode mode) const
+  {
+    return set_texture_blend_mode(native_, mode);
+  }
+
+  [[nodiscard]]
+  std::expected<blend_mode, std::string> get_blend_mode() const
+  {
+    return get_texture_blend_mode(native_);
+  }
+
+  std::expected<void, std::string> set_scale_mode(const SDL_ScaleMode mode) const
+  {
+    return set_texture_scale_mode(native_, mode);
+  }
+
+  [[nodiscard]]
+  std::expected<SDL_ScaleMode, std::string> get_scale_mode() const
+  {
+    return get_texture_scale_mode(native_);
+  }
+
+  std::expected<void, std::string> set_user_data(void* user_data) const
+  {
+    return set_texture_user_data(native_, user_data);
+  }
+
+  [[nodiscard]]
+  void* get_user_data() const
+  {
+    return get_texture_user_data(native_);
+  }
+
+  std::expected<void, std::string> update(
+    const rectangle<std::int32_t>*  rect,
+    const void*                     pixels,
+    const std::int32_t              pitch) const
+  {
+    return update_texture(native_, rect, pixels, pitch);
+  }
+
+  std::expected<void, std::string> update_yuv(
+    const rectangle<std::int32_t>*  rect,
+    const std::uint8_t*             y_plane,
+    const std::int32_t              y_pitch,
+    const std::uint8_t*             u_plane,
+    const std::int32_t              u_pitch,
+    const std::uint8_t*             v_plane,
+    const std::int32_t              v_pitch) const
+  {
+    return update_yuv_texture(native_, rect, y_plane, y_pitch, u_plane, u_pitch, v_plane, v_pitch);
+  }
+
+  std::expected<void, std::string> update_nv(
+    const rectangle<std::int32_t>*  rect,
+    const std::uint8_t*             y_plane,
+    const std::int32_t              y_pitch,
+    const std::uint8_t*             uv_plane,
+    const std::int32_t              uv_pitch) const
+  {
+    return update_nv_texture(native_, rect, y_plane, y_pitch, uv_plane, uv_pitch);
+  }
+
+  std::expected<void, std::string> lock(
+    const rectangle<std::int32_t>*  rect,
+    void**                          pixels,
+    int*                            pitch) const
+  {
+    return lock_texture(native_, rect, pixels, pitch);
+  }
+
+  std::expected<void, std::string> lock_to_surface(
+    const rectangle<std::int32_t>*  rect,
+    SDL_Surface**                   surface) const
+  {
+    return lock_texture_to_surface(native_, rect, surface);
+  }
+
+  void unlock() const
+  {
+    unlock_texture(native_);
+  }
+
 private:
   SDL_Texture* native_  {};
   bool         managed_ {true};
@@ -828,6 +940,182 @@ public:
   bool is_managed() const noexcept
   {
     return managed_;
+  }
+
+  // Convenience methods
+  [[nodiscard]]
+  std::expected<renderer_info, std::string> get_info() const
+  {
+    return get_renderer_info(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<std::array<std::int32_t, 2>, std::string> get_output_size() const
+  {
+    return get_renderer_output_size(native_);
+  }
+
+  [[nodiscard]]
+  bool target_supported() const
+  {
+    return render_target_supported(native_);
+  }
+
+  std::expected<void, std::string> set_target(SDL_Texture* texture_ptr) const
+  {
+    return set_render_target(native_, texture_ptr);
+  }
+
+  [[nodiscard]]
+  SDL_Texture* get_target() const
+  {
+    return get_render_target(native_);
+  }
+
+  std::expected<void, std::string> set_logical_size(const std::array<std::int32_t, 2>& size) const
+  {
+    return render_set_logical_size(native_, size);
+  }
+
+  [[nodiscard]]
+  std::array<std::int32_t, 2> get_logical_size() const
+  {
+    return render_get_logical_size(native_);
+  }
+
+  std::expected<void, std::string> set_integer_scale(const bool enable) const
+  {
+    return render_set_integer_scale(native_, enable);
+  }
+
+  [[nodiscard]]
+  bool get_integer_scale() const
+  {
+    return render_get_integer_scale(native_);
+  }
+
+  std::expected<void, std::string> set_viewport(const rectangle<std::int32_t>* rect) const
+  {
+    return render_set_viewport(native_, rect);
+  }
+
+  [[nodiscard]]
+  rectangle<std::int32_t> get_viewport() const
+  {
+    return render_get_viewport(native_);
+  }
+
+  std::expected<void, std::string> set_clip_rect(const rectangle<std::int32_t>* rect) const
+  {
+    return render_set_clip_rect(native_, rect);
+  }
+
+  [[nodiscard]]
+  rectangle<std::int32_t> get_clip_rect() const
+  {
+    return render_get_clip_rect(native_);
+  }
+
+  [[nodiscard]]
+  bool is_clip_enabled() const
+  {
+    return render_is_clip_enabled(native_);
+  }
+
+  std::expected<void, std::string> set_scale(const float scale_x, const float scale_y) const
+  {
+    return render_set_scale(native_, scale_x, scale_y);
+  }
+
+  [[nodiscard]]
+  std::array<float, 2> get_scale() const
+  {
+    return render_get_scale(native_);
+  }
+
+  std::expected<void, std::string> set_draw_color(const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a) const
+  {
+    return set_render_draw_color(native_, r, g, b, a);
+  }
+
+  [[nodiscard]]
+  std::expected<std::array<std::uint8_t, 4>, std::string> get_draw_color() const
+  {
+    return get_render_draw_color(native_);
+  }
+
+  std::expected<void, std::string> set_draw_blend_mode(const blend_mode mode) const
+  {
+    return set_render_draw_blend_mode(native_, mode);
+  }
+
+  [[nodiscard]]
+  std::expected<blend_mode, std::string> get_draw_blend_mode() const
+  {
+    return get_render_draw_blend_mode(native_);
+  }
+
+  std::expected<void, std::string> clear() const
+  {
+    return render_clear(native_);
+  }
+
+  std::expected<void, std::string> draw_point(const std::array<std::int32_t, 2>& point) const
+  {
+    return render_draw_point(native_, point);
+  }
+
+  std::expected<void, std::string> draw_line(const std::array<std::int32_t, 2>& p1, const std::array<std::int32_t, 2>& p2) const
+  {
+    return render_draw_line(native_, p1, p2);
+  }
+
+  std::expected<void, std::string> draw_rect(const rectangle<std::int32_t>* rect) const
+  {
+    return render_draw_rect(native_, rect);
+  }
+
+  std::expected<void, std::string> fill_rect(const rectangle<std::int32_t>* rect) const
+  {
+    return render_fill_rect(native_, rect);
+  }
+
+  std::expected<void, std::string> copy(
+    SDL_Texture*                    texture_ptr,
+    const rectangle<std::int32_t>*  src_rect,
+    const rectangle<std::int32_t>*  dst_rect) const
+  {
+    return render_copy(native_, texture_ptr, src_rect, dst_rect);
+  }
+
+  std::expected<void, std::string> copy_ex(
+    SDL_Texture*                    texture_ptr,
+    const rectangle<std::int32_t>*  src_rect,
+    const rectangle<std::int32_t>*  dst_rect,
+    const double                    angle,
+    const SDL_Point*                center,
+    const renderer_flip             flip) const
+  {
+    return render_copy_ex(native_, texture_ptr, src_rect, dst_rect, angle, center, flip);
+  }
+
+  std::expected<void, std::string> read_pixels(
+    const rectangle<std::int32_t>*  rect,
+    const std::uint32_t             format,
+    void*                           pixels,
+    const std::int32_t              pitch) const
+  {
+    return render_read_pixels(native_, rect, format, pixels, pitch);
+  }
+
+  void present() const
+  {
+    render_present(native_);
+  }
+
+  std::expected<void, std::string> set_vsync(const int vsync) const
+  {
+    return render_set_v_sync(native_, vsync);
   }
 
 private:

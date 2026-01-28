@@ -556,6 +556,169 @@ public:
     return managed_;
   }
 
+  // Convenience methods
+  [[nodiscard]]
+  std::string name() const
+  {
+    return game_controller_name(native_);
+  }
+
+  [[nodiscard]]
+  std::string path() const
+  {
+    return game_controller_path(native_);
+  }
+
+  [[nodiscard]]
+  game_controller_type get_type() const
+  {
+    return game_controller_get_type(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t get_player_index() const
+  {
+    return game_controller_get_player_index(native_);
+  }
+
+  void set_player_index(const std::int32_t player_index) const
+  {
+    game_controller_set_player_index(native_, player_index);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_vendor() const
+  {
+    return game_controller_get_vendor(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_product() const
+  {
+    return game_controller_get_product(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_product_version() const
+  {
+    return game_controller_get_product_version(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_firmware_version() const
+  {
+    return game_controller_get_firmware_version(native_);
+  }
+
+  [[nodiscard]]
+  std::string get_serial() const
+  {
+    return game_controller_get_serial(native_);
+  }
+
+  [[nodiscard]]
+  bool get_attached() const
+  {
+    return game_controller_get_attached(native_);
+  }
+
+  [[nodiscard]]
+  native_joystick* get_joystick() const
+  {
+    return game_controller_get_joystick(native_);
+  }
+
+  [[nodiscard]]
+  std::string mapping() const
+  {
+    return game_controller_mapping(native_);
+  }
+
+  [[nodiscard]]
+  bool has_axis(const game_controller_axis axis) const
+  {
+    return game_controller_has_axis(native_, axis);
+  }
+
+  [[nodiscard]]
+  bool has_button(const game_controller_button button) const
+  {
+    return game_controller_has_button(native_, button);
+  }
+
+  [[nodiscard]]
+  std::int16_t get_axis(const game_controller_axis axis) const
+  {
+    return game_controller_get_axis(native_, axis);
+  }
+
+  [[nodiscard]]
+  std::uint8_t get_button(const game_controller_button button) const
+  {
+    return game_controller_get_button(native_, button);
+  }
+
+  [[nodiscard]]
+  std::int32_t get_num_touchpads() const
+  {
+    return game_controller_get_num_touchpads(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t get_num_touchpad_fingers(const std::int32_t touchpad) const
+  {
+    return game_controller_get_num_touchpad_fingers(native_, touchpad);
+  }
+
+  std::expected<void, std::string> rumble(
+    const std::uint16_t     low_frequency_rumble,
+    const std::uint16_t     high_frequency_rumble,
+    const std::uint32_t     duration_ms) const
+  {
+    return game_controller_rumble(native_, low_frequency_rumble, high_frequency_rumble, duration_ms);
+  }
+
+  std::expected<void, std::string> rumble_triggers(
+    const std::uint16_t     left_rumble,
+    const std::uint16_t     right_rumble,
+    const std::uint32_t     duration_ms) const
+  {
+    return game_controller_rumble_triggers(native_, left_rumble, right_rumble, duration_ms);
+  }
+
+  [[nodiscard]]
+  bool has_led() const
+  {
+    return game_controller_has_led(native_);
+  }
+
+  [[nodiscard]]
+  bool has_rumble() const
+  {
+    return game_controller_has_rumble(native_);
+  }
+
+  [[nodiscard]]
+  bool has_rumble_triggers() const
+  {
+    return game_controller_has_rumble_triggers(native_);
+  }
+
+  std::expected<void, std::string> set_led(
+    const std::uint8_t      red,
+    const std::uint8_t      green,
+    const std::uint8_t      blue) const
+  {
+    return game_controller_set_led(native_, red, green, blue);
+  }
+
+  std::expected<void, std::string> send_effect(
+    const void*             data,
+    const std::int32_t      size) const
+  {
+    return game_controller_send_effect(native_, data, size);
+  }
+
 private:
   native_game_controller* native_  {};
   bool                    managed_ {true};

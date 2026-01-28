@@ -421,6 +421,180 @@ public:
     return managed_;
   }
 
+  // Convenience methods
+  [[nodiscard]]
+  std::string name() const
+  {
+    return joystick_name(native_);
+  }
+
+  [[nodiscard]]
+  std::string path() const
+  {
+    return joystick_path(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t get_player_index() const
+  {
+    return joystick_get_player_index(native_);
+  }
+
+  void set_player_index(const std::int32_t player_index) const
+  {
+    joystick_set_player_index(native_, player_index);
+  }
+
+  [[nodiscard]]
+  guid get_guid() const
+  {
+    return joystick_get_guid(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_vendor() const
+  {
+    return joystick_get_vendor(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_product() const
+  {
+    return joystick_get_product(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_product_version() const
+  {
+    return joystick_get_product_version(native_);
+  }
+
+  [[nodiscard]]
+  std::uint16_t get_firmware_version() const
+  {
+    return joystick_get_firmware_version(native_);
+  }
+
+  [[nodiscard]]
+  std::string get_serial() const
+  {
+    return joystick_get_serial(native_);
+  }
+
+  [[nodiscard]]
+  joystick_type get_type() const
+  {
+    return joystick_get_type(native_);
+  }
+
+  [[nodiscard]]
+  bool get_attached() const
+  {
+    return joystick_get_attached(native_);
+  }
+
+  [[nodiscard]]
+  native_joystick_id instance_id() const
+  {
+    return joystick_instance_id(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_axes() const
+  {
+    return joystick_num_axes(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_balls() const
+  {
+    return joystick_num_balls(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_hats() const
+  {
+    return joystick_num_hats(native_);
+  }
+
+  [[nodiscard]]
+  std::int32_t num_buttons() const
+  {
+    return joystick_num_buttons(native_);
+  }
+
+  [[nodiscard]]
+  std::int16_t get_axis(const std::int32_t axis) const
+  {
+    return joystick_get_axis(native_, axis);
+  }
+
+  [[nodiscard]]
+  std::uint8_t get_hat(const std::int32_t hat) const
+  {
+    return joystick_get_hat(native_, hat);
+  }
+
+  [[nodiscard]]
+  std::expected<std::array<std::int32_t, 2>, std::string> get_ball(const std::int32_t ball) const
+  {
+    return joystick_get_ball(native_, ball);
+  }
+
+  [[nodiscard]]
+  std::uint8_t get_button(const std::int32_t button) const
+  {
+    return joystick_get_button(native_, button);
+  }
+
+  std::expected<void, std::string> rumble(
+    const std::uint16_t   low_frequency_rumble,
+    const std::uint16_t   high_frequency_rumble,
+    const std::uint32_t   duration_ms) const
+  {
+    return joystick_rumble(native_, low_frequency_rumble, high_frequency_rumble, duration_ms);
+  }
+
+  std::expected<void, std::string> rumble_triggers(
+    const std::uint16_t   left_rumble,
+    const std::uint16_t   right_rumble,
+    const std::uint32_t   duration_ms) const
+  {
+    return joystick_rumble_triggers(native_, left_rumble, right_rumble, duration_ms);
+  }
+
+  std::expected<void, std::string> set_led(
+    const std::uint8_t  red,
+    const std::uint8_t  green,
+    const std::uint8_t  blue) const
+  {
+    return joystick_set_led(native_, red, green, blue);
+  }
+
+  [[nodiscard]]
+  bool has_led() const
+  {
+    return joystick_has_led(native_);
+  }
+
+  [[nodiscard]]
+  bool has_rumble() const
+  {
+    return joystick_has_rumble(native_);
+  }
+
+  [[nodiscard]]
+  bool has_rumble_triggers() const
+  {
+    return joystick_has_rumble_triggers(native_);
+  }
+
+  [[nodiscard]]
+  joystick_power_level current_power_level() const
+  {
+    return joystick_current_power_level(native_);
+  }
+
 private:
   native_joystick* native_  {};
   bool             managed_ {true};

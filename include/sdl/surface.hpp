@@ -461,6 +461,138 @@ public:
     return managed_;
   }
 
+  // Convenience methods
+  std::expected<void, std::string> set_palette(SDL_Palette* palette) const
+  {
+    return set_surface_palette(native_, palette);
+  }
+
+  std::expected<void, std::string> lock() const
+  {
+    return lock_surface(native_);
+  }
+
+  void unlock() const
+  {
+    unlock_surface(native_);
+  }
+
+  std::expected<void, std::string> set_rle(const bool enabled) const
+  {
+    return set_surface_rle(native_, enabled);
+  }
+
+  [[nodiscard]]
+  bool has_rle() const
+  {
+    return has_surface_rle(native_);
+  }
+
+  std::expected<void, std::string> set_color_key(const bool enabled, const std::uint32_t key) const
+  {
+    return sdl::set_color_key(native_, enabled, key);
+  }
+
+  [[nodiscard]]
+  bool has_color_key() const
+  {
+    return sdl::has_color_key(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<std::uint32_t, std::string> get_color_key() const
+  {
+    return sdl::get_color_key(native_);
+  }
+
+  std::expected<void, std::string> set_color_mod(const std::uint8_t r, const std::uint8_t g, const std::uint8_t b) const
+  {
+    return set_surface_color_mod(native_, r, g, b);
+  }
+
+  [[nodiscard]]
+  std::expected<std::array<std::uint8_t, 3>, std::string> get_color_mod() const
+  {
+    return get_surface_color_mod(native_);
+  }
+
+  std::expected<void, std::string> set_alpha_mod(const std::uint8_t alpha) const
+  {
+    return set_surface_alpha_mod(native_, alpha);
+  }
+
+  [[nodiscard]]
+  std::expected<std::uint8_t, std::string> get_alpha_mod() const
+  {
+    return get_surface_alpha_mod(native_);
+  }
+
+  std::expected<void, std::string> set_blend_mode(const blend_mode mode) const
+  {
+    return set_surface_blend_mode(native_, mode);
+  }
+
+  [[nodiscard]]
+  std::expected<blend_mode, std::string> get_blend_mode() const
+  {
+    return get_surface_blend_mode(native_);
+  }
+
+  bool set_clip_rect(const rectangle<std::int32_t>* rect) const
+  {
+    return sdl::set_clip_rect(native_, rect);
+  }
+
+  [[nodiscard]]
+  rectangle<std::int32_t> get_clip_rect() const
+  {
+    return sdl::get_clip_rect(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<SDL_Surface*, std::string> duplicate() const
+  {
+    return duplicate_surface(native_);
+  }
+
+  [[nodiscard]]
+  std::expected<SDL_Surface*, std::string> convert(const SDL_PixelFormat* format) const
+  {
+    return convert_surface(native_, format);
+  }
+
+  [[nodiscard]]
+  std::expected<SDL_Surface*, std::string> convert_format(const std::uint32_t pixel_format) const
+  {
+    return convert_surface_format(native_, pixel_format);
+  }
+
+  std::expected<void, std::string> fill_rect(const rectangle<std::int32_t>* rect, const std::uint32_t color) const
+  {
+    return sdl::fill_rect(native_, rect, color);
+  }
+
+  std::expected<void, std::string> blit(
+    const rectangle<std::int32_t>* src_rect,
+    SDL_Surface*                   dst,
+    rectangle<std::int32_t>*       dst_rect) const
+  {
+    return blit_surface(native_, src_rect, dst, dst_rect);
+  }
+
+  std::expected<void, std::string> blit_scaled(
+    const rectangle<std::int32_t>* src_rect,
+    SDL_Surface*                   dst,
+    rectangle<std::int32_t>*       dst_rect) const
+  {
+    return sdl::blit_scaled(native_, src_rect, dst, dst_rect);
+  }
+
+  std::expected<void, std::string> save_bmp(const std::string& file) const
+  {
+    return sdl::save_bmp(native_, file);
+  }
+
 private:
   SDL_Surface* native_  {};
   bool         managed_ {true};
